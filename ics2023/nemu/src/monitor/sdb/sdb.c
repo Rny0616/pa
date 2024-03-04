@@ -55,6 +55,16 @@ static int cmd_q(char *args) {
 
 static int cmd_help(char *args);
 
+static int cmd_si(char *args) {
+  cpu_exec(1);  
+  return -1;
+}
+
+static int cmd_info_r(char *args) {
+  isa_reg_display();  
+  return -1;
+}
+
 static struct {
   const char *name;
   const char *description;
@@ -63,6 +73,8 @@ static struct {
   { "help", "Display information about all supported commands", cmd_help },
   { "c", "Continue the execution of the program", cmd_c },
   { "q", "Exit NEMU", cmd_q },
+  { "si", "step in by once", cmd_si },
+  { "r", "print regs status", cmd_info_r },
 
   /* TODO: Add more commands */
 
