@@ -74,7 +74,7 @@ static int cmd_info_r(char *args)
 
 static int cmd_scan_mem(char *args)
 {
-  if (args != NULL)
+  if (args == NULL)
   {
     return 0;
   }
