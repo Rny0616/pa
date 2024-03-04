@@ -39,7 +39,7 @@ static char* rl_gets() {
     add_history(line_read);
   }
 
-  return line_read;
+  return line_read; 
 }
 
 static int cmd_c(char *args) {
@@ -49,6 +49,7 @@ static int cmd_c(char *args) {
 
 
 static int cmd_q(char *args) {
+  nemu_state.state =NEMU_END;  
   return -1;
 }
 
