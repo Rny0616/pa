@@ -74,7 +74,7 @@ static int cmd_info_r(char *args)
 
 static int cmd_scan_mem(char *args)
 {
-  printf("%ld\n",paddr_read(0x80000000,4));
+  printf("%lx\n",paddr_read(0x80000000,4));
   
   return 0;
 }
