@@ -83,7 +83,7 @@ static int cmd_scan_mem(char *args)
   int i = atoi(args);
   printf("%d\n",i);
 
-  printf("%lx\n",paddr_read(0x80000004,4));
+  printf("%lx\n",paddr_read(0x80000004,i));
   
   return 0;
 }
