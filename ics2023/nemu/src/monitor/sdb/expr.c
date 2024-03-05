@@ -48,7 +48,7 @@ static struct rule
     {"==", TK_EQ},     // equal
     {"\\(", '('},      // parenthesis
     {"\\)", ')'},      // parenthesis
-    {"\[0-9]", TK_NUM},  // num
+    {"\[0-9]+", TK_NUM},  // num
    
 };
 
