@@ -156,6 +156,7 @@ int main_op(int p,int q){
         continue;
       }
     }
+    p++;
     op = p;
   }
   return op;
