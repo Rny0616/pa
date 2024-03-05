@@ -142,7 +142,7 @@ bool check_parentheses(int p,int q){
   {
     return false;
   }
-  p++;
+  
   while (p<q)
   { 
     if (tokens[p].type == ')')
