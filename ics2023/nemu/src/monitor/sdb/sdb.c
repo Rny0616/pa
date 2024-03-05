@@ -18,6 +18,7 @@
 #include <readline/readline.h>
 #include <readline/history.h>
 #include "sdb.h"
+#include <memory/paddr.h>
 
 static int is_batch_mode = false;
 
@@ -65,6 +66,17 @@ static int cmd_info_r(char *args) {
   return 0;
 }
 
+static int cmd_scan_mem(char *args) {
+  paddr_read(0x80000000,2);
+  return 0;
+}
+
+static int cmd_test_expr(char *args) {
+  printf("%s\n",args);
+  return 0;
+}
+
+
 static struct {
   const char *name;
   const char *description;
@@ -75,6 +87,8 @@ static struct {
   { "q", "Exit NEMU", cmd_q },
   { "si", "step in by once", cmd_si },
   { "r", "print regs status", cmd_info_r },
+  { "x", "print regs status", cmd_scan_mem },
+  { "d", "print regs status", cmd_test_expr },
 
   /* TODO: Add more commands */
 
