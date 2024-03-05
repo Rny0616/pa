@@ -148,20 +148,19 @@ int main_op(int p,int q){
       p++;
       continue;
     }
-    else if (tokens[p].type == '(')
-    {
-      p++;
-      while (tokens[p].type != ')')
-      {
-        p++;
-      }
-    }
+    // else if (tokens[p].type == '(')
+    // {
+    //   p++;
+    //   while (tokens[p].type != ')')
+    //   {
+    //     p++;
+    //   }
+    // }
     else
     {
-      printf("aa");
-       op = p;
+      p++;
+      op = p;
     }
-    p++;
   
   }
   return op;
