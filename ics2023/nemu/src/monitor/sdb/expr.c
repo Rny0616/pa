@@ -135,6 +135,63 @@ static bool make_token(char *e)
 
   return true;
 }
+// int check_parentheses(p, q){
+//   TODO();
+// }
+
+int main_op(int p,int q){
+  int op = 0;
+  while (p >=q)
+  {
+    if (tokens[p].type ==TK_NUM )
+    {
+      p++;
+      break;
+    }else if (tokens[p].type == '(')
+    {
+      p++;
+      while (tokens[p].type == ')')
+      {
+        p++;
+        break;
+      }
+    }
+    op = p;
+  }
+  return op;
+}
+
+// word_t eval(int p,int q) {
+//   if (p > q) {
+//     /* Bad expression */
+//   }
+//   else if (p == q) {
+//     /* Single token.
+//      * For now this token should be a number.
+//      * Return the value of the number.
+//      */
+//     return atoi(tokens[p].str);
+//   }
+//   else if (check_parentheses(p, q) == true) {
+//     /* The expression is surrounded by a matched pair of parentheses.
+//      * If that is the case, just throw away the parentheses.
+//      */
+//     return eval(p + 1, q - 1);
+//   }
+//   else {
+//     /* We should do more things here. */
+//     op = the position of 主运算符 in the token expression;
+//     val1 = eval(p, op - 1);
+//     val2 = eval(op + 1, q);
+
+//     switch (op_type) {
+//       case '+': return val1 + val2;
+//       case '-': /* ... */
+//       case '*': /* ... */
+//       case '/': /* ... */
+//       default: assert(0);
+//   }
+// }
 
 word_t expr(char *e, bool *success)
 {
@@ -144,11 +201,8 @@ word_t expr(char *e, bool *success)
   //   *success = false;
   //   return 0;
   // }
-  for (int i = 0; i < nr_token; i++)
-  {
-    printf("%s\n",tokens[i].str);
-  }
-  printf("\n");  
+  int op = main_op(0,nr_token);
+  printf("%s\n",tokens[op].str);
   /* TODO: Insert codes to evaluate the expression. */
   // TODO();
 
