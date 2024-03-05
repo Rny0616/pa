@@ -39,17 +39,17 @@ static struct rule
     /* TODO: Add more rules.
      * Pay attention to the precedence level of different rules.
      */
-    {" +", TK_NOTYPE}, // spaces
-    {"\\+", '+'},      // plus
-    {"\\-", '-'},      // sub
-    {"\\*", '*'},      // times
-    {"\\%", '%'},      // mod
-    {"\\/", '/'},      // div
-    {"==", TK_EQ},     // equal
-    {"\\(", '('},      // parenthesis
-    {"\\)", ')'},      // parenthesis
-    {"\[0-9]+", TK_NUM},  // num
-   
+    {" +", TK_NOTYPE},   // spaces
+    {"\\+", '+'},        // plus
+    {"\\-", '-'},        // sub
+    {"\\*", '*'},        // times
+    {"\\%", '%'},        // mod
+    {"\\/", '/'},        // div
+    {"==", TK_EQ},       // equal
+    {"\\(", '('},        // parenthesis
+    {"\\)", ')'},        // parenthesis
+    {"\[0-9]+", TK_NUM}, // num
+
 };
 
 #define NR_REGEX ARRLEN(rules)
@@ -114,8 +114,8 @@ static bool make_token(char *e)
         {
           break;
         }
-        
-        tokens[nr_token].type = rules[i].token_type;                      // 匹配到的类型
+
+        tokens[nr_token].type = rules[i].token_type;             // 匹配到的类型
         strncpy(tokens[nr_token].str, substr_start, substr_len); // 匹配到的字符
         nr_token++;
         // switch (rules[i].token_type) {
@@ -136,27 +136,32 @@ static bool make_token(char *e)
   return true;
 }
 
-
 // int check_parentheses(p, q){
 //   TODO();
 // }
 
-int main_op(int p,int q){
-  int op = 0 ;
+int main_op(int p, int q)
+{
+  int op = 0;
   while (p < q)
   {
-    if (tokens[p].type ==TK_NUM )
+    if (tokens[p].type == TK_NUM)
     {
       p++;
-    }else{
-      if (tokens[op].type == '+' || tokens[op].type == '-'  )
+    }
+    else
+    {
+      if (tokens[op].type == '+' || tokens[op].type == '-')
       {
-        if (tokens[p].type == '+' || tokens[p].type == '-' )
+        if (tokens[p].type == '+' || tokens[p].type == '-')
         {
           op = p;
         }
       }
-      op = p;
+      else
+      {
+        op = p;
+      }
       p++;
     }
     // else if (tokens[p].type == '(')
@@ -212,15 +217,15 @@ word_t expr(char *e, bool *success)
   //   return 0;
   // }
 
-  int op = main_op(0,nr_token);
-  printf("%d\n",op);
+  int op = main_op(0, nr_token);
+  printf("%d\n", op);
 
   // for (int i = 0; i < nr_token; i++)
   // {
   // printf("%d\n",tokens[i].type);
   //   /* code */
   // }
-  
+
   /* TODO: Insert codes to evaluate the expression. */
   // TODO();
 
