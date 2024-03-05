@@ -204,12 +204,12 @@ int main_op(int p, int q)
 
 word_t eval(int p, int q)
 {
-  if (p == q)
+  if (p < q)
   {
     return 0;
     /* Bad expression */
   }
-  else if (p == q-1)
+  else if (p == q)
   {
     /* Single token.
      * For now this token should be a number.
@@ -217,19 +217,19 @@ word_t eval(int p, int q)
      */
     return atoi(tokens[p].str);
   }
-  else if (check_parentheses(p, q) == true)
+  else if (check_parentheses(p, q+1) == true)
   {
     /* The expression is surrounded by a matched pair of parentheses.
      * If that is the case, just throw away the parentheses.
      */
-    return eval(p + 1, q - 1);
+    return eval(p + 1, q-1);
   }
   else
   {
     /* We should do more things here. */
-    int op = main_op(p, q);
+    int op = main_op(p, q+1);
     int val1 = eval(p, op - 1);
-    int val2 = eval(op + 1, q-1);
+    int val2 = eval(op + 1, q);
 
     switch (tokens[op].type)
     {
@@ -259,7 +259,7 @@ word_t expr(char *e, bool *success)
   // }
 
   // int op = main_op(0, nr_token);
-  word_t val = eval(0,nr_token);
+  word_t val = eval(0,nr_token-1);
   printf("%ld\n",val);
 
   // for (int i = 0; i < nr_token; i++)
