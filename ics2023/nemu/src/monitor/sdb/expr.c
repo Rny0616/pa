@@ -153,7 +153,6 @@ int main_op(int p,int q){
       while (tokens[p].type != ')')
       {
         p++;
-        continue;
       }
     }else{
        op = p;
