@@ -149,6 +149,14 @@ int main_op(int p, int q)
     {
       p++;
     }
+    else if (tokens[p].type == '(')
+    {
+      p++;
+      while (tokens[p].type != ')')
+      {
+        p++;
+      }
+    }
     else
     {
       if (tokens[op].type == '+' || tokens[op].type == '-')
@@ -164,14 +172,6 @@ int main_op(int p, int q)
       }
       p++;
     }
-    // else if (tokens[p].type == '(')
-    // {
-    //   p++;
-    //   while (tokens[p].type != ')')
-    //   {
-    //     p++;
-    //   }
-    // }
   }
   return op;
 }
