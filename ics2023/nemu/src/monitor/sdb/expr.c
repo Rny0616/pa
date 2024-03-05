@@ -147,8 +147,8 @@ int main_op(int p,int q){
     {
       p++;
     }else{
-      p++;
       op = p;
+      p++;
     }
     // else if (tokens[p].type == '(')
     // {
