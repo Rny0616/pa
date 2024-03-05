@@ -133,12 +133,17 @@ static bool make_token(char *e)
 
 word_t expr(char *e, bool *success)
 {
-  if (!make_token(e))
+  make_token(e);
+  // if (!make_token(e))
+  // {
+  //   *success = false;
+  //   return 0;
+  // }
+  for (int i = 0; i < nr_token; i++)
   {
-    *success = false;
-    return 0;
+    printf("%s\t",tokens[i].str);
   }
-
+  printf("\n");  
   /* TODO: Insert codes to evaluate the expression. */
   // TODO();
 

@@ -73,6 +73,7 @@ static int cmd_scan_mem(char *args) {
 
 static int cmd_test_expr(char *args) {
   printf("%s\n",args);
+  expr(args,false);
   return 0;
 }
 
