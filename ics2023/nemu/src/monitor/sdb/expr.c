@@ -204,12 +204,12 @@ int main_op(int p, int q)
 
 word_t eval(int p, int q)
 {
-  if (p > q)
+  if (p == q)
   {
     return 0;
     /* Bad expression */
   }
-  else if (p == q)
+  else if (p == q-1)
   {
     /* Single token.
      * For now this token should be a number.
@@ -229,7 +229,7 @@ word_t eval(int p, int q)
     /* We should do more things here. */
     int op = main_op(p, q);
     int val1 = eval(p, op - 1);
-    int val2 = eval(op + 1, q);
+    int val2 = eval(op + 1, q-1);
 
     switch (tokens[op].type)
     {
