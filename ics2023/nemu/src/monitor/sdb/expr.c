@@ -141,7 +141,7 @@ static bool make_token(char *e)
 
 int main_op(int p,int q){
   int op = 0;
-  while (p <= q)
+  while (p < q)
   {
     if (tokens[p].type ==TK_NUM )
     {
