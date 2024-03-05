@@ -72,7 +72,6 @@ static int cmd_info_r(char *args)
   return 0;
 }
 
-<<<<<<< HEAD
 static int cmd_scan_mem(char *args) {
   paddr_read(0x80000000,2);
   return 0;
@@ -97,34 +96,6 @@ static struct {
   { "r", "print regs status", cmd_info_r },
   { "x", "print regs status", cmd_scan_mem },
   { "d", "print regs status", cmd_test_expr },
-=======
-static int cmd_scan_mem(char *args)
-{
-  if (args == NULL)
-  {
-    return 0;
-  }
-
-  int i = atoi(args);
-
-  printf("%lx\n",paddr_read(0x80000000,i));
-  
-  return 0;
-}
-
-static struct
-{
-  const char *name;
-  const char *description;
-  int (*handler)(char *);
-} cmd_table[] = {
-    {"help", "Display information about all supported commands", cmd_help},
-    {"c", "Continue the execution of the program", cmd_c},
-    {"q", "Exit NEMU", cmd_q},
-    {"si", "step in by once", cmd_si},
-    {"r", "print regs status", cmd_info_r},
-    {"x", "print mem", cmd_scan_mem},
->>>>>>> 1ae09d4f2b2ddb995922c1ec919bf3cd09ddfadf
 
     /* TODO: Add more commands */
 

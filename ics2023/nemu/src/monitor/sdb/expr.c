@@ -258,8 +258,12 @@ word_t expr(char *e, bool *success)
   // }
 
   // int op = main_op(0, nr_token);
-  int op = check_parentheses(0,nr_token);
-  printf("%d\n", op);
+  if(check_parentheses(0,nr_token)){
+    printf("1\n");
+  }else{
+    printf("2\n");
+  }
+  
 
   // for (int i = 0; i < nr_token; i++)
   // {
