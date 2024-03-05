@@ -115,7 +115,7 @@ static bool make_token(char *e)
           break;
         }
         
-        tokens->type = rules[i].token_type;                      // 匹配到的类型
+        tokens[i].type = rules[i].token_type;                      // 匹配到的类型
         strncpy(tokens[nr_token].str, substr_start, substr_len); // 匹配到的字符
         nr_token++;
         // switch (rules[i].token_type) {
@@ -205,7 +205,7 @@ word_t expr(char *e, bool *success)
   // }
   int op = main_op(0,nr_token);
   printf("%d\n",op);
-  printf("%d",tokens[1].type);
+  printf("%d\n",tokens[1].type);
   /* TODO: Insert codes to evaluate the expression. */
   // TODO();
 
