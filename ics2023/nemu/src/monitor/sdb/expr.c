@@ -135,18 +135,27 @@ static bool make_token(char *e)
 
   return true;
 }
+
+
 // int check_parentheses(p, q){
 //   TODO();
 // }
 
 int main_op(int p,int q){
-  int op = 0;
+  int op = 0 ;
   while (p < q)
   {
     if (tokens[p].type ==TK_NUM )
     {
       p++;
     }else{
+      if (tokens[op].type == '+' || tokens[op].type == '-'  )
+      {
+        if (tokens[p].type == '+' || tokens[p].type == '-' )
+        {
+          op = p;
+        }
+      }
       op = p;
       p++;
     }
