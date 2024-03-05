@@ -141,7 +141,7 @@ static bool make_token(char *e)
 
 int main_op(int p,int q){
   int op = 0;
-  while (p >=q)
+  while (p >= q)
   {
     if (tokens[p].type ==TK_NUM )
     {
@@ -202,7 +202,7 @@ word_t expr(char *e, bool *success)
   //   return 0;
   // }
   int op = main_op(0,nr_token);
-  printf("%s\n",tokens[op].str);
+  printf("%d\n",op);
   /* TODO: Insert codes to evaluate the expression. */
   // TODO();
 
