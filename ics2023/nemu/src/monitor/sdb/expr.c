@@ -48,8 +48,8 @@ static struct rule
     {"==", TK_EQ},     // equal
     {"\\(", '('},      // parenthesis
     {"\\)", ')'},      // parenthesis
-    {"\\num", TK_NUM},  // num
-    {"\\d", TK_NUM},  // num
+    {"\[0-9]", TK_NUM},  // num
+   
 };
 
 #define NR_REGEX ARRLEN(rules)
