@@ -204,7 +204,7 @@ int main_op(int p, int q)
 
 word_t eval(int p, int q)
 {
-  if (p < q)
+  if (p > q)
   {
     return 0;
     /* Bad expression */
