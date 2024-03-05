@@ -137,7 +137,7 @@ static bool make_token(char *e)
 }
 
 bool check_parentheses(int p,int q){
-  int s = 1;
+  int s = 0;
   if (tokens[p].type != '(')
   {
     return false;
