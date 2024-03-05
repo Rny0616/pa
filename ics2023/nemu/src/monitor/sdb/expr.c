@@ -146,12 +146,14 @@ int main_op(int p,int q){
     if (tokens[p].type ==TK_NUM )
     {
       p++;
+      continue;
     }else if (tokens[p].type == '(')
     {
       p++;
       while (tokens[p].type != ')')
       {
         p++;
+        continue;
       }
     }else{
        op = p;
