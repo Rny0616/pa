@@ -203,13 +203,15 @@ word_t expr(char *e, bool *success)
   //   *success = false;
   //   return 0;
   // }
-  // int op = main_op(0,nr_token);
-  // printf("%d\n",op);
-  for (int i = 0; i < nr_token; i++)
-  {
-  printf("%d\n",tokens[i].type);
-    /* code */
-  }
+
+  int op = main_op(0,nr_token);
+  printf("%d\n",op);
+
+  // for (int i = 0; i < nr_token; i++)
+  // {
+  // printf("%d\n",tokens[i].type);
+  //   /* code */
+  // }
   
   /* TODO: Insert codes to evaluate the expression. */
   // TODO();
