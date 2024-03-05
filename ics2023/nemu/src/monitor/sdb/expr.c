@@ -206,6 +206,7 @@ word_t eval(int p, int q)
 {
   if (p > q)
   {
+    return 0;
     /* Bad expression */
   }
   else if (p == q)
@@ -258,12 +259,8 @@ word_t expr(char *e, bool *success)
   // }
 
   // int op = main_op(0, nr_token);
-  if(check_parentheses(0,nr_token)){
-    printf("1\n");
-  }else{
-    printf("2\n");
-  }
-  
+  word_t val = eval(0,nr_token);
+  printf("%ld\n",val);
 
   // for (int i = 0; i < nr_token; i++)
   // {
