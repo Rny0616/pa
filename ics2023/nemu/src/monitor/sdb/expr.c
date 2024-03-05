@@ -115,7 +115,7 @@ static bool make_token(char *e)
           break;
         }
         
-        tokens[i].type = rules[i].token_type;                      // 匹配到的类型
+        tokens[nr_token].type = rules[i].token_type;                      // 匹配到的类型
         strncpy(tokens[nr_token].str, substr_start, substr_len); // 匹配到的字符
         nr_token++;
         // switch (rules[i].token_type) {
