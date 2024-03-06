@@ -64,7 +64,7 @@ void scan_wp(){
   WP *temp = head;
   while (temp != NULL)
   {
-    printf("%d : %s\n",head->NO,head->expr_str);
+    printf("%d : %s\n",temp->NO,temp->expr_str);
     temp = temp->next;
   }
   
