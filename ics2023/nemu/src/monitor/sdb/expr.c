@@ -233,7 +233,9 @@ word_t eval(int p, int q)
       num = strtol(tokens[p].str, &endptr, 0);
       return num; 
     }else{
-      return 0;
+      int i = 0;
+      sscanf( tokens[p].str, "$%d",&i);
+      return cpu.gpr[i];
     }
     
   }
