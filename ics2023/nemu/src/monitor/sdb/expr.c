@@ -51,8 +51,8 @@ static struct rule
     {"==", TK_EQ},       // equal
     {"\\(", '('},        // parenthesis
     {"\\)", ')'},        // parenthesis
-    {"\[0-9]+", TK_NUM}, // num
     {"0[xX][0-9a-fA-F]+",TK_HNUM}, //hexadecimal-number
+    {"\[0-9]+", TK_NUM}, // num
     {"$[0-9a-zA-Z]+",TK_REG} ,//REG
     {"!=",TK_UNEQ}, //unequal
     {"&&",TK_AND},//AND
