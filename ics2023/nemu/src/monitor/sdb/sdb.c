@@ -204,7 +204,7 @@ void test_expr() {
     if(fscanf(fp, "%lu ", &correct_res) == -1) break;
     read = getline(&e, &len, fp);
     e[read-1] = '\0';
-    printf("%ld",sizeof(e));
+    printf("%ld",strlen(e));
     // word_t res = expr(e, &success);
     // printf("%ld",res);
     // assert(success);
