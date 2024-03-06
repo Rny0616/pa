@@ -85,6 +85,15 @@ static int cmd_test_expr(char *args) {
   return 0;
 }
 
+static int cmd_watchpoint(char *args){
+  new_wp(args);
+  // word_t val = expr(args);
+  return 0;
+}
+
+static int cmd_delete_wp(char *args){
+  return 0;
+}
 
 static struct {
   const char *name;
@@ -97,8 +106,9 @@ static struct {
   { "si", "step in by once", cmd_si },
   { "r", "print regs status", cmd_info_r },
   { "x", "print regs status", cmd_scan_mem },
-  { "d", "print regs status", cmd_test_expr },
-
+  { "p", "print regs status", cmd_test_expr },
+  { "w", "print regs status", cmd_watchpoint },
+  { "d", "print regs status", cmd_delete_wp },
     /* TODO: Add more commands */
 
 };
