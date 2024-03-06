@@ -257,12 +257,15 @@ word_t expr(char *e, bool *success)
     return 0;
   }
 
-  word_t val = eval(0,nr_token-1);
-  printf("%ld\n",val);
+  // word_t val = eval(0,nr_token-1);
+  // printf("%ld\n",val);
+  for (int i = 0; i < nr_token; i++)
+  {
+    printf("%s",tokens[i].str);
+  }
+  
 
   *success = true;
-  /* TODO: Insert codes to evaluate the expression. */
-  // TODO();
 
-  return val;
+  return 0;
 }
