@@ -53,8 +53,19 @@ int new_wp(char *s){
   head = wp;
   return 0;
 };
+
 void free_wp(WP *wp){
   wp->next = free_;
   free_ = wp;
   wp->expr_str[0] = '\0';
 };
+
+void scan_wp(){
+  WP *temp = head;
+  while (temp != NULL)
+  {
+    printf("%d : %s\n",head->NO,head->expr_str);
+    temp = temp->next;
+  }
+  
+}
