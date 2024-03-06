@@ -39,8 +39,12 @@ static void trace_and_difftest(Decode *_this, vaddr_t dnpc) {
   if (g_print_step) { IFDEF(CONFIG_ITRACE, puts(_this->logbuf)); }
   IFDEF(CONFIG_DIFFTEST, difftest_step(_this->pc, dnpc));
 
-  scan_wp();
-
+  int i = scan_wp();
+  if (i == 0)
+  {
+    nemu_state.state = NEMU_STOP;
+  }
+  printf("触发了监测点\n");
 }
 
 static void exec_once(Decode *s, vaddr_t pc) {

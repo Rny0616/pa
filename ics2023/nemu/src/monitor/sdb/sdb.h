@@ -20,6 +20,6 @@
 
 word_t expr(char *e, bool *success);
 int new_wp(char *s);
-void scan_wp();
+int scan_wp();
 
 #endif
