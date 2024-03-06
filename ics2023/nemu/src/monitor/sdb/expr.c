@@ -265,7 +265,7 @@ word_t expr(char *e, bool *success)
   }
   
 
-  *success = true;
+  printf("%p\n",success);
 
   return 0;
 }
