@@ -61,11 +61,22 @@ int new_wp(char *s)
   return 0;
 };
 
-void free_wp(WP *wp)
+void free_wp(int no)
 {
-  wp->next = free_;
-  free_ = wp;
-  wp->expr_str[0] = '\0';
+  WP *temp = head;
+  while (temp != NULL )
+  {
+    if (temp->NO == no)
+    {
+      break;
+    }
+    
+    temp = temp->next;
+  }
+  temp->next = free_;
+  free_ = temp;
+  temp->expr_str[0] = '\0';
+  free(temp);
 };
 
 int scan_wp()

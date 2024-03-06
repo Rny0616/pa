@@ -92,6 +92,7 @@ static int cmd_watchpoint(char *args){
 }
 
 static int cmd_delete_wp(char *args){
+  
   return 0;
 }
 
