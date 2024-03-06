@@ -78,9 +78,10 @@ static int cmd_scan_mem(char *args) {
 }
 
 static int cmd_test_expr(char *args) {
-  printf("%s\n",args);
+  
   bool success = false;
-  expr(args,&success);
+  
+  printf("%s = %ld\n",args,expr(args,&success));
   return 0;
 }
 
