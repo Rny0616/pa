@@ -25,7 +25,10 @@ enum
   TK_NOTYPE = 256,
   TK_EQ,
   TK_NUM,
-
+  TK_HNUM,
+  TK_AND,
+  TK_UNEQ,
+  TK_REG,
   /* TODO: Add more token types */
 
 };
@@ -49,7 +52,10 @@ static struct rule
     {"\\(", '('},        // parenthesis
     {"\\)", ')'},        // parenthesis
     {"\[0-9]+", TK_NUM}, // num
-
+    {"0[xX][0-9a-fA-F]+",TK_HNUM}, //hexadecimal-number
+    {"$[0-9a-zA-Z]+",TK_REG} ,//REG
+    {"!=",TK_UNEQ}, //unequal
+    {"&&",TK_AND},//AND
 };
 
 #define NR_REGEX ARRLEN(rules)
@@ -215,7 +221,20 @@ word_t eval(int p, int q)
      * For now this token should be a number.
      * Return the value of the number.
      */
-    return atoi(tokens[p].str);
+    if (tokens[p].type == TK_NUM)
+    {
+      
+      return atoi(tokens[p].str);
+    }else if (tokens[p].type == TK_HNUM)
+    {
+      char *endptr;
+      word_t num;
+      num = strtol(tokens[p].str, &endptr, 10);
+      return num; 
+    }else{
+      return 0;
+    }
+    
   }
   else if (check_parentheses(p, q+1) == true)
   {
