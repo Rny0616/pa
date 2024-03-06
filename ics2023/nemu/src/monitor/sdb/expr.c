@@ -233,9 +233,11 @@ word_t eval(int p, int q)
       num = strtol(tokens[p].str, &endptr, 0);
       return num; 
     }else{
-      int i = 0;
-      sscanf( tokens[p].str, "$%d",&i);
-      return cpu.gpr[i];
+      // int i = 0;
+      // sscanf( tokens[p].str, "$%d",&i);
+      bool success = false;
+      return isa_reg_str2val(tokens[p].str,&success);
+      
     }
     
   }
