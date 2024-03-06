@@ -76,7 +76,7 @@ void free_wp(int no)
   temp->next = free_;
   free_ = temp;
   temp->expr_str[0] = '\0';
-  free(temp);
+
 };
 
 int scan_wp()
