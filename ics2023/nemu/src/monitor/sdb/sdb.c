@@ -92,7 +92,7 @@ static int cmd_watchpoint(char *args){
 }
 
 static int cmd_delete_wp(char *args){
-  
+  free_wp(atoi(args));
   return 0;
 }
 
