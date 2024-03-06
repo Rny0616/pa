@@ -49,7 +49,8 @@ int new_wp(char *s){
   WP *wp =free_;
   strcpy(wp->expr_str,s);
   free_ = free_->next;
-  wp->next = NULL;
+  wp->next = head;
+  head = wp;
   return 0;
 };
 void free_wp(WP *wp){
