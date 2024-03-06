@@ -21,5 +21,6 @@
 word_t expr(char *e, bool *success);
 int new_wp(char *s);
 int scan_wp();
+void info_w();
 
 #endif

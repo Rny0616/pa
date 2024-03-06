@@ -76,7 +76,7 @@ int scan_wp()
   while (temp != NULL)
   {
     printf("%d : %s\n", temp->NO, temp->expr_str);
-    temp_val = expr(temp->expr_str,&success);
+    temp_val = expr(temp->expr_str, &success);
     if (temp_val != temp->val)
     {
       return 0;
@@ -84,4 +84,15 @@ int scan_wp()
     temp = temp->next;
   }
   return 1;
+}
+
+void info_w()
+{
+  WP *temp = head;
+  while (temp != NULL)
+  {
+    printf("NUM:%d \t EXPR:%s \t VAL:%ld\n", temp->NO, temp->expr_str,temp->val);
+    
+    temp = temp->next;
+  }
 }
