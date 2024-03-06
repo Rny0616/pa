@@ -215,7 +215,7 @@ void test_expr() {
     // }
   }
 
-  fclose(fp);
+  // fclose(fp);
   // if (e) free(e);
 
   Log("expr test pass");
