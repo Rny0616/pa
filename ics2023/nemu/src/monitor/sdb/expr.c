@@ -229,6 +229,7 @@ word_t eval(int p, int q)
     {
       char *endptr;
       word_t num;
+      printf("a\n");
       num = strtol(tokens[p].str, &endptr, 10);
       return num; 
     }else{
