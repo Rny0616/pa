@@ -191,8 +191,8 @@ void sdb_mainloop()
 }
 
 void test_expr() {
-  FILE *fp = fopen("/tmp/.expr", "r");
-  if (fp == NULL) perror("test_expr error");
+  FILE *fp = fopen("/home/rny/ics2023/nemu/tools/gen-expr/file.txt", "r");
+  if (fp == NULL) perror("file.txt error");
 
   char *e = NULL;
   word_t correct_res;

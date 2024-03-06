@@ -112,7 +112,9 @@ int main(int argc, char *argv[]) {
     ret = fscanf(fp, "%lu", &result);
     pclose(fp);
 
-    printf("%lu %s\n", result, buf);
+    fp = fopen ("file.txt", "w+");
+    fprintf(fp, "%lu %s",  result, buf);
+    // printf("%lu %s\n", result, buf);
     buf[0] = '\0';
     buf_start = buf;
   }
