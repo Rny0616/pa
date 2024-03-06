@@ -95,6 +95,12 @@ static int cmd_delete_wp(char *args){
   return 0;
 }
 
+static int cmd_info_w(char *args)
+{
+  info_w();
+  return 0;
+}
+
 static struct {
   const char *name;
   const char *description;
@@ -109,6 +115,7 @@ static struct {
   { "p", "print regs status", cmd_test_expr },
   { "w", "print regs status", cmd_watchpoint },
   { "d", "print regs status", cmd_delete_wp },
+  { "info", "print regs status", cmd_info_w },
     /* TODO: Add more commands */
 
 };
