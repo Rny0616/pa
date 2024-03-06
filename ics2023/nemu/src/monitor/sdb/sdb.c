@@ -199,21 +199,21 @@ void test_expr() {
   word_t correct_res;
   size_t len = 0;
   size_t read;
-  // bool success = false;
+  bool success = false;
 
   while (true) {
     if(fscanf(fp, "%lu ", &correct_res) == -1) break;
     read = getline(&e, &len, fp);
     e[read-1] = '\0';
     printf("%ld",strlen(e));
-    // word_t res = expr(e, &success);
-    // printf("%ld",res);
-    // assert(success);
-    // if (res != correct_res) {
-    //   puts(e);
-    //   printf("expected: %lu, got: %lu\n", correct_res, res);
-    //   assert(0);
-    // }
+    word_t res = expr(e, &success);
+    printf("%ld",res);
+    assert(success);
+    if (res != correct_res) {
+      puts(e);
+      printf("expected: %lu, got: %lu\n", correct_res, res);
+      assert(0);
+    }
   }
 
   // fclose(fp);
@@ -228,7 +228,7 @@ void init_sdb()
   init_regex();
 
 /* test math expression calculation */
-  // test_expr();
+  test_expr();
 
   /* Initialize the watchpoint pool. */
   init_wp_pool();
