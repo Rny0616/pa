@@ -23,13 +23,13 @@
 // this should be enough
 static char buf[65536] = {};
 static char code_buf[65536 + 128] = {}; // a little larger than `buf`
-// static char *code_format =
-// "#include <stdio.h>\n"
-// "int main() { "
-// "  unsigned result = %s; "
-// "  printf(\"%%u\", result); "
-// "  return 0; "
-// "}";
+static char *code_format =
+"#include <stdio.h>\n"
+"int main() { "
+"  unsigned result = %s; "
+"  printf(\"%%u\", result); "
+"  return 0; "
+"}";
 
 static char *buf_start = buf;
 static char *buf_end = buf+(sizeof(buf)/sizeof(buf[0]));
@@ -94,25 +94,27 @@ int main(int argc, char *argv[]) {
   int i;
   for (i = 0; i < loop; i ++) {
     gen_rand_expr();
-    printf("%s\n",buf);
-    // sprintf(code_buf, code_format, buf);
+    
+    sprintf(code_buf, code_format, buf);
 
-    // FILE *fp = fopen("/tmp/.code.c", "w");
-    // assert(fp != NULL);
-    // fputs(code_buf, fp);
-    // fclose(fp);
+    FILE *fp = fopen("/tmp/.code.c", "w");
+    assert(fp != NULL);
+    fputs(code_buf, fp);
+    fclose(fp);
 
-    // int ret = system("gcc /tmp/.code.c -o /tmp/.expr");
-    // if (ret != 0) continue;
+    int ret = system("gcc /tmp/.code.c -Wall -Werror -o /tmp/.expr");
+    if (ret != 0) continue;
 
-    // fp = popen("/tmp/.expr", "r");
-    // assert(fp != NULL);
+    fp = popen("/tmp/.expr", "r");
+    assert(fp != NULL);
 
-    // int result;
-    // ret = fscanf(fp, "%d", &result);
-    // pclose(fp);
+    uint64_t  result;
+    ret = fscanf(fp, "%lu", &result);
+    pclose(fp);
 
-    // printf("%u %s\n", result, buf);
+    printf("%lu %s\n", result, buf);
+    buf[0] = '\0';
+    buf_start = buf;
   }
   return 0;
 }
