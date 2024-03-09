@@ -164,7 +164,7 @@ void sdb_set_batch_mode()
   is_batch_mode = true;
 }
 
-int temp = -1;
+static int temp = -1;
 char *ctemp = NULL;
 void sdb_mainloop()
 {
