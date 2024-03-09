@@ -65,6 +65,7 @@ static int cmd_si(char *args)
   if (args == NULL)
   {
     cpu_exec(1);
+    isa_reg_display();
     return 0;
   }
   int n = atoi(args);
@@ -163,6 +164,8 @@ void sdb_set_batch_mode()
   is_batch_mode = true;
 }
 
+int temp = -1;
+char *ctemp = NULL;
 void sdb_mainloop()
 {
   if (is_batch_mode)
@@ -179,6 +182,14 @@ void sdb_mainloop()
     char *cmd = strtok(str, " ");
     if (cmd == NULL)
     {
+      if (temp !=-1)
+      {
+        if (cmd_table[temp].handler(ctemp) < 0)
+        {
+          return;
+        }
+      }
+      
       continue;
     }
 
