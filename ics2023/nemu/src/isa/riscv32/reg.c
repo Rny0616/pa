@@ -31,7 +31,7 @@ void isa_reg_display()
     {
       printf("\n");
     }
-    printf("%s:%ld\t", regs[i],cpu.gpr[i]);
+    printf("%s:%lx\t", regs[i],cpu.gpr[i]);
     
   }
    printf("\n");
