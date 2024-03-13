@@ -79,7 +79,7 @@ void elf_parse(char *file)
   for (int i = 0; i < count; ++i)
   {
     if(strcmp(strtable+shdr[i].sh_name,".symtab")==0){
-      printf("%d\n",shdr[i].sh_type);
+      printf("%d\n",i);
     };
     // printf("%d\n",shdr[i].sh_name);   
   }
