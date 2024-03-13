@@ -51,7 +51,7 @@ void elf_parse(char *file)
 
   int a;
   char strtable[1280];
-  a = fread(&elf_head, sizeof(Elf64_Ehdr), 1, fp); // fread参数1：读取内容存储地址，参数2：读取内容大小，参数3：读取次数，参数4：文件读取引擎
+  a = fread(&elf_head, sizeof(Elf64_Ehdr), 1, fp); // fread参数1：读取内容存储地址，参�?2：读取内容大小，参数3：读取次数，参数4：文件读取引�?
   if (0 == a)
   {
     printf("fail to read head\n");
@@ -67,7 +67,7 @@ void elf_parse(char *file)
   }
 
   Elf64_Shdr shdr[99];
-  int count = elf_head.e_shnum; // 节头表数量
+  int count = elf_head.e_shnum; // 节头表数�?
   
   fseek(fp, elf_head.e_shoff, SEEK_SET);//定位表头偏移
 
@@ -75,10 +75,10 @@ void elf_parse(char *file)
   
   fseek(fp, shdr[elf_head.e_shstrndx].sh_offset, SEEK_SET);//定位shstrndx实际表的偏移
  
-  a = fread(strtable, 1, shdr[elf_head.e_shstrndx].sh_size, fp);//读出表名的表读到字符串
+  a = fread(strtable, 1, shdr[elf_head.e_shstrndx].sh_size, fp);//读出表名的表读到字符�?
   for (int i = 0; i < count; ++i)
   {
-    printf("%s\n",strtable+1);   
+    printf("%d\n",shdr[i].sh_name);   
   }
   return;
 }
