@@ -76,13 +76,17 @@ void elf_parse(char *file)
   fseek(fp, shdr[elf_head.e_shstrndx].sh_offset, SEEK_SET);//定位shstrndx实际表的偏移
  
   a = fread(strtable, 1, shdr[elf_head.e_shstrndx].sh_size, fp);//读出表名的表读到字符�?
-  for (int i = 0; i < count; ++i)
+  int i = 0;
+  for (i = 0; i < count; ++i)
   {
     if(strcmp(strtable+shdr[i].sh_name,".symtab")==0){
       printf("%d\n",i);
+      break;
     };
     // printf("%d\n",shdr[i].sh_name);   
   }
+      printf("%d\n",i);
+
   return;
 }
 
