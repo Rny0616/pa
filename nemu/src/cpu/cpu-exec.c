@@ -104,7 +104,7 @@ void elf_parse(char *file)
   a = fread(shstrtab, shdr[elf_head.e_shstrndx].sh_size, 1, fp);
   if (0 == a)
   {
-    printf("\nfaile to read\n");
+    printf("\nfaile to read1\n");
   }
 
   // uint8_t *symtab_data=NULL, *strtab_data = NULL;
