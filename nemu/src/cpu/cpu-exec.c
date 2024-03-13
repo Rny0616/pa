@@ -85,11 +85,10 @@ void elf_parse(char *file)
     // 读取section 到 shdr, 大小为shdr * 数量
     a = fread(shdr, sizeof(Elf64_Shdr) * elf_head.e_shnum, 1, fp);
   if (0 == a)
-    // {
-    //   printf("\nfail to read section\n");
-    //   exit(0);
-    // }
-    printf("%x\n", elf_head.e_shstrndx);
+    {
+      printf("\nfail to read section\n");
+      exit(0);
+    }
   // 重置指针位置到文件流开头
   rewind(fp);
 
