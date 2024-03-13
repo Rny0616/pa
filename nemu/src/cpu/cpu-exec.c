@@ -91,7 +91,6 @@ void elf_parse(char *file)
   }
   // 重置指针位置到文件流开头
   rewind(fp);
-  printf("%d\n",elf_head.e_shstrndx);
   // Elf64_Shdr *shstrndx = shdr+6;
   int i = 0;
   for (; i < elf_head.e_shnum; i++)
@@ -102,8 +101,7 @@ void elf_parse(char *file)
     }
     shdr++;
   }
-  
-
+printf("%d\n",i);
   return;
 }
 
