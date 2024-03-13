@@ -68,7 +68,7 @@ void elf_parse(char *file)
   for (int i = 0; i < EI_NIDENT; i++)
   {
     
-  printf("%d",elf_head.e_ident[i]);
+  printf("%x",elf_head.e_ident[i]);
   }
   
   // 解析section 分配内存 section * 数量
