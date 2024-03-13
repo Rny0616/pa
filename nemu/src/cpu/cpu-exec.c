@@ -74,10 +74,11 @@ void elf_parse(char *file)
   a =fread(shdr, sizeof(Elf64_Shdr), count, fp);//读出所有表头到shdr
   
   fseek(fp, shdr[elf_head.e_shstrndx].sh_offset, SEEK_SET);//定位shstrndx实际表的偏移
+ 
   a = fread(strtable, 1, shdr[elf_head.e_shstrndx].sh_size, fp);//读出表名的表读到字符串
   for (int i = 0; i < count; ++i)
   {
-    printf("%d",shdr[i].sh_type);   
+    printf("%s\n",strtable);   
   }
   return;
 }
