@@ -67,96 +67,96 @@ void elf_parse(char *file)
   }
 
   // 解析section 分配内存 section * 数量
-  Elf64_Shdr *shdr = (Elf64_Shdr *)malloc(sizeof(Elf64_Shdr) * elf_head.e_shnum);
-  if (NULL == shdr)
-  {
-    printf("shdr malloc failed\n");
-    exit(0);
-  }
+  // Elf64_Shdr *shdr = (Elf64_Shdr *)malloc(sizeof(Elf64_Shdr) * elf_head.e_shnum);
+  // if (NULL == shdr)
+  // {
+  //   printf("shdr malloc failed\n");
+  //   exit(0);
+  // }
 
-  // 设置fp偏移量 offset，e_shoff含义
-  a = fseek(fp, elf_head.e_shoff, SEEK_SET); // fseek调整指针的位置，采用参考位置+偏移量
-  if (0 != a)
-  {
-    printf("\nfaile to fseek\n");
-    exit(0);
-  }
+  // // 设置fp偏移量 offset，e_shoff含义
+  // a = fseek(fp, elf_head.e_shoff, SEEK_SET); // fseek调整指针的位置，采用参考位置+偏移量
+  // if (0 != a)
+  // {
+  //   printf("\nfaile to fseek\n");
+  //   exit(0);
+  // }
 
-  // 读取section 到 shdr, 大小为shdr * 数量
-  a = fread(shdr, sizeof(Elf64_Shdr) * elf_head.e_shnum, 1, fp);
-  if (0 == a)
-  {
-    printf("\nfail to read section\n");
-    exit(0);
-  }
+  // // 读取section 到 shdr, 大小为shdr * 数量
+  // a = fread(shdr, sizeof(Elf64_Shdr) * elf_head.e_shnum, 1, fp);
+  // if (0 == a)
+  // {
+  //   printf("\nfail to read section\n");
+  //   exit(0);
+  // }
 
-  // 重置指针位置到文件流开头
-  rewind(fp);
+  // // 重置指针位置到文件流开头
+  // rewind(fp);
 
-  // 将fp指针移到 字符串表偏移位置处
-  fseek(fp, shdr[elf_head.e_shstrndx].sh_offset, SEEK_SET);
+  // // 将fp指针移到 字符串表偏移位置处
+  // fseek(fp, shdr[elf_head.e_shstrndx].sh_offset, SEEK_SET);
 
-  // 第e_shstrndx项是字符串表 定义 字节 长度 char类型 数组
-  char shstrtab[shdr[elf_head.e_shstrndx].sh_size];
-  char *temp = shstrtab;
+  // // 第e_shstrndx项是字符串表 定义 字节 长度 char类型 数组
+  // char shstrtab[shdr[elf_head.e_shstrndx].sh_size];
+  // char *temp = shstrtab;
 
-  // 读取内容
-  a = fread(shstrtab, shdr[elf_head.e_shstrndx].sh_size, 1, fp);
-  if (0 == a)
-  {
-    printf("\nfaile to read\n");
-  }
+  // // 读取内容
+  // a = fread(shstrtab, shdr[elf_head.e_shstrndx].sh_size, 1, fp);
+  // if (0 == a)
+  // {
+  //   printf("\nfaile to read\n");
+  // }
 
-  uint8_t *symtab_data=NULL, *strtab_data = NULL;
-  // int sym_len, str_len;
-  int  sym_len=0,str_len = 0;
-  // 遍历
-  for (int i = 0; i < elf_head.e_shnum; i++)
-  {
-    temp = shstrtab;
-    temp = temp + shdr[i].sh_name;
-    if (strcmp(temp, ".symtab") == 0)
-    {
-      symtab_data = (uint8_t *)malloc(sizeof(uint8_t) * shdr[i].sh_size);
-      fseek(fp, shdr[i].sh_offset, SEEK_SET);
-      a = fread(symtab_data, sizeof(uint8_t) * shdr[i].sh_size, 1, fp);
-      sym_len = shdr[i].sh_size;
-    }
-    else if (strcmp(temp, ".strtab") == 0)
-    {
-      strtab_data = (uint8_t *)malloc(sizeof(uint8_t) * shdr[i].sh_size);
-      fseek(fp, shdr[i].sh_offset, SEEK_SET);
-      a = fread(strtab_data, sizeof(uint8_t) * shdr[i].sh_size, 1, fp);
-      str_len = shdr[i].sh_size;
-    }
-    else
-    {
-      continue;
-    }
-    // if (strcmp(temp, ".strtab") != 0) {}continue;//该section名称 .symtab .strtab
-    // printf("节的名称: %s\n", temp);
-    // printf("节首的偏移: %lx\n", shdr[i].sh_offset);
-    // printf("节的大小: %lx\n", shdr[i].sh_size);
-    // uint8_t *sign_data=(uint8_t*)malloc(sizeof(uint8_t)*shdr[i].sh_size);
-    // // 依据此段在文件中的偏移读取出
-    // fseek(fp, shdr[i].sh_offset, SEEK_SET);
-    // a = fread(sign_data, sizeof(uint8_t)*shdr[i].sh_size, 1, fp);
-    // // 显示读取的内容
-  }
-    uint8_t *p = symtab_data;
-    int j = 0;
-    for (j = 0; j < sym_len; j++)
-    {
-      printf("%c", *p);
-      p++;
-    }
-    printf("----------------------------------\n");
-    p = strtab_data;
-    for (j = 0; j < str_len; j++)
-    {
-      printf("%x", *p);
-      p++;
-    }
+  // uint8_t *symtab_data=NULL, *strtab_data = NULL;
+  // // int sym_len, str_len;
+  // int  sym_len=0,str_len = 0;
+  // // 遍历
+  // for (int i = 0; i < elf_head.e_shnum; i++)
+  // {
+  //   temp = shstrtab;
+  //   temp = temp + shdr[i].sh_name;
+  //   if (strcmp(temp, ".symtab") == 0)
+  //   {
+  //     symtab_data = (uint8_t *)malloc(sizeof(uint8_t) * shdr[i].sh_size);
+  //     fseek(fp, shdr[i].sh_offset, SEEK_SET);
+  //     a = fread(symtab_data, sizeof(uint8_t) * shdr[i].sh_size, 1, fp);
+  //     sym_len = shdr[i].sh_size;
+  //   }
+  //   else if (strcmp(temp, ".strtab") == 0)
+  //   {
+  //     strtab_data = (uint8_t *)malloc(sizeof(uint8_t) * shdr[i].sh_size);
+  //     fseek(fp, shdr[i].sh_offset, SEEK_SET);
+  //     a = fread(strtab_data, sizeof(uint8_t) * shdr[i].sh_size, 1, fp);
+  //     str_len = shdr[i].sh_size;
+  //   }
+  //   else
+  //   {
+  //     continue;
+  //   }
+  //   // if (strcmp(temp, ".strtab") != 0) {}continue;//该section名称 .symtab .strtab
+  //   // printf("节的名称: %s\n", temp);
+  //   // printf("节首的偏移: %lx\n", shdr[i].sh_offset);
+  //   // printf("节的大小: %lx\n", shdr[i].sh_size);
+  //   // uint8_t *sign_data=(uint8_t*)malloc(sizeof(uint8_t)*shdr[i].sh_size);
+  //   // // 依据此段在文件中的偏移读取出
+  //   // fseek(fp, shdr[i].sh_offset, SEEK_SET);
+  //   // a = fread(sign_data, sizeof(uint8_t)*shdr[i].sh_size, 1, fp);
+  //   // // 显示读取的内容
+  // }
+  //   uint8_t *p = symtab_data;
+  //   int j = 0;
+  //   for (j = 0; j < sym_len; j++)
+  //   {
+  //     printf("%c", *p);
+  //     p++;
+  //   }
+  //   printf("----------------------------------\n");
+  //   p = strtab_data;
+  //   for (j = 0; j < str_len; j++)
+    // {
+    //   printf("%x", *p);
+    //   p++;
+    // }
   return;
 }
 #endif
