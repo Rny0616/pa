@@ -98,10 +98,10 @@ void elf_parse(char *file)
     if (shdr->sh_type == SHT_SYMTAB)
     {
       break;
+printf("%d\n",i);
     }
     shdr++;
   }
-printf("%d\n",i);
   return;
 }
 
