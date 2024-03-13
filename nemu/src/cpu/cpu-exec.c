@@ -100,7 +100,7 @@ void elf_parse(char *file)
       break;
       printf("%d\n", i);
     }
-    shdr+=elf_head.e_shentsize*i;
+    shdr+=shdr->sh_entsize;
   }
   return;
 }
