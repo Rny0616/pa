@@ -91,6 +91,7 @@ void elf_parse(char *file)
   }
   // 重置指针位置到文件流开头
   rewind(fp);
+  printf("%d\n",elf_head.e_shnum);
 
   return;
 }
