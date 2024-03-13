@@ -93,11 +93,6 @@ void elf_parse(char *file)
   // 重置指针位置到文件流开头
   rewind(fp);
 
-  for (int i = 0; i < elf_head.e_shnum; i++)
-  {
-    printf("%x\n", shdr->sh_type);
-  }
-
   // // 将fp指针移到 字符串表偏移位置处
   fseek(fp, shdr[elf_head.e_shstrndx].sh_offset, SEEK_SET);
 
