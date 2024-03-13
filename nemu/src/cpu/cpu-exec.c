@@ -67,7 +67,8 @@ void elf_parse(char *file)
   }
 
   // 解析section 分配内存 section * 数量
-  Elf64_Shdr *shdr = (Elf64_Shdr *)malloc(sizeof(Elf64_Shdr) * elf_head.e_shnum);
+  // Elf64_Shdr *shdr = (Elf64_Shdr *)malloc(sizeof(Elf64_Shdr) * elf_head.e_shnum);
+  Elf64_Shdr shdr[elf_head.e_shnum];
   if (NULL == shdr)
     // {
     //   printf("shdr malloc failed\n");
@@ -95,12 +96,12 @@ void elf_parse(char *file)
   int i = 0;
   for (; i < elf_head.e_shnum; i++)
   {
-    if (shdr->sh_type == SHT_SYMTAB)
+    if (shdr[i].sh_type == SHT_SYMTAB)
     {
       break;
       printf("%d\n", i);
     }
-    shdr+=shdr->sh_entsize;
+    // shdr += shdr->sh_entsize;
   }
   return;
 }
