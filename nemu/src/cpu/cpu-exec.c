@@ -78,7 +78,10 @@ void elf_parse(char *file)
   a = fread(strtable, 1, shdr[elf_head.e_shstrndx].sh_size, fp);//读出表名的表读到字符�?
   for (int i = 0; i < count; ++i)
   {
-    printf("%d\n",shdr[i].sh_name);   
+    if(strcmp(strtable+shdr[i].sh_name,".symtab")==0){
+      printf("%d\n",shdr[i].sh_type);
+    };
+    // printf("%d\n",shdr[i].sh_name);   
   }
   return;
 }
