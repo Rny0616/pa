@@ -68,94 +68,16 @@ void elf_parse(char *file)
 
   Elf64_Shdr shdr[99];
   int count = elf_head.e_shnum; // 节头表数量
-  fseek(fp, elf_head.e_shoff, SEEK_SET);
-  a =fread(shdr, sizeof(Elf64_Shdr), count, fp);
-  fseek(fp, shdr[elf_head.e_shstrndx].sh_offset, SEEK_SET);
-  a = fread(strtable, 1, shdr[elf_head.e_shstrndx].sh_size, fp);
-  printf("There are %d section headers, starting at offset 0x%04lx:\n\n", count, elf_head.e_shoff);
-  puts("节头表:");
-  printf("[编号]\t名称\t\t\t\t属性\t虚拟地址\t\t偏移量\t\t大小\t\t索引值\t信息\t对齐长度\t表项大小\n");
+  
+  fseek(fp, elf_head.e_shoff, SEEK_SET);//定位表头偏移
+
+  a =fread(shdr, sizeof(Elf64_Shdr), count, fp);//读出所有表头到shdr
+  
+  fseek(fp, shdr[elf_head.e_shstrndx].sh_offset, SEEK_SET);//定位shstrndx实际表的偏移
+  a = fread(strtable, 1, shdr[elf_head.e_shstrndx].sh_size, fp);//读出表名的表读到字符串
   for (int i = 0; i < count; ++i)
   {
-    printf("[%02d]\t%s", i, &strtable[shdr[i].sh_name]);
-    for (int j = 0; j < 20 - strlen(&strtable[shdr[i].sh_name]); ++j)
-    {
-      putchar(' ');
-    }
-    switch (shdr[i].sh_type)
-    {
-    case 0:
-      printf("SHT_NULL\t");
-      break;
-    case 1:
-      printf("SHT_PROGBITS");
-      break;
-    case 2:
-      printf("SHT_SYMTAB\t");
-      break;
-    case 3:
-      printf("SHT_STRTAB\t");
-      break;
-    case 4:
-      printf("SHT_RELA\t");
-      break;
-    case 5:
-      printf("SHT_HASH\t");
-      break;
-    case 6:
-      printf("SHT_DYNAMIC\t");
-      break;
-    case 7:
-      printf("SHT_NOTE\t");
-      break;
-    case 8:
-      printf("SHT_NOBITS\t");
-      break;
-    case 9:
-      printf("SHT_REL\t");
-      break;
-    case 10:
-      printf("SHT_SHLIB\t");
-      break;
-    case 11:
-      printf("SHT_DYNSYM\t");
-      break;
-    case 14:
-      printf("SHT_INIT_ARRAY");
-      break;
-    case 15:
-      printf("SHT_FINI_ARRAY");
-      break;
-    case 0x70000000:
-      printf("SHT_LOPROC");
-      break;
-    case 0x7fffffff:
-      printf("SHT_HIPROC");
-      break;
-    case 0x80000000:
-      printf("SHT_LOUSER");
-      break;
-    case 0xffffffff:
-      printf("SHT_HIUSER");
-      break;
-    case 0x6ffffff6:
-      printf("SHT_GNU_HASH");
-      break;
-    case 0x6fffffff:
-      printf("SHT_GNU_versym");
-      break;
-    case 0x6ffffffe:
-      printf("SHT_GNU_verneed");
-      break;
-    }
-    printf("\t0x%lx\t", shdr[i].sh_flags);
-    printf("0x%016lx\t", shdr[i].sh_addr);
-    printf("0x%08lx\t", shdr[i].sh_offset);
-    printf("%4lu bytes\t", shdr[i].sh_size);
-    printf("%u\t", shdr[i].sh_link);
-    printf("%u\t", shdr[i].sh_info);
-    printf("%2lu bytes\t", shdr[i].sh_addralign);
-    printf("%4lx\n", shdr[i].sh_entsize);
+    printf("%d",shdr[i].sh_type);   
   }
   return;
 }
