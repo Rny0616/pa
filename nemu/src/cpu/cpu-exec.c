@@ -96,12 +96,13 @@ void elf_parse(char *file)
   int i = 0;
   for (; i < elf_head.e_shnum; i++)
   {
-    if (shdr[i].sh_type == SHT_SYMTAB)
-    {
-      break;
-      printf("%d\n", i);
-    }
+    // if (shdr[i].sh_type == SHT_SYMTAB)
+    // {
+    //   break;
+    //   printf("%d\n", i);
+    // }
     // shdr += shdr->sh_entsize;
+    printf("%d",shdr[i].sh_type);
   }
   return;
 }
