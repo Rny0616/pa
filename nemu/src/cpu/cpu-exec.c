@@ -65,7 +65,12 @@ void elf_parse(char *file)
     printf("Not a ELF file\n");
     exit(0);
   }
-  printf("%s",elf_head.e_ident);
+  for (int i = 0; i < EI_NIDENT; i++)
+  {
+    
+  printf("%d",elf_head.e_ident[i]);
+  }
+  
   // 解析section 分配内存 section * 数量
   // Elf64_Shdr *shdr = (Elf64_Shdr *)malloc(sizeof(Elf64_Shdr) * elf_head.e_shnum);
   // if (NULL == shdr)
