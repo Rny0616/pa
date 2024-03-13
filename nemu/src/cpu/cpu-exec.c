@@ -86,9 +86,9 @@ void elf_parse(char *file)
     // printf("%d\n",shdr[i].sh_name);   
   }
   a = fseek(fp,shdr[i].sh_offset, SEEK_SET);
-  Elf64_Sym sym;
-  a = fread(&sym,sizeof(Elf64_Sym),1,fp);
-  // printf("%d\n",sym);
+  Elf64_Sym sym[shdr[i].sh_size/sizeof(Elf64_Sym)];
+  a = fread(&sym,sizeof(Elf64_Sym),shdr[i].sh_size/sizeof(Elf64_Sym),fp);
+  // printf("%d\n",sym[0]);
   return;
 }
 
