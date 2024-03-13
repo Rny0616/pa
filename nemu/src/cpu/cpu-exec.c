@@ -48,7 +48,7 @@ void elf_parse(char *file)
   }
   // 解析head
   Elf64_Ehdr elf_head;
-  // int shnum, a;
+
   int a;
 
   a = fread(&elf_head, sizeof(Elf64_Ehdr), 1, fp); // fread参数1：读取内容存储地址，参数2：读取内容大小，参数3：读取次数，参数4：文件读取引擎
