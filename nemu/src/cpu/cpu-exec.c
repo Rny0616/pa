@@ -80,6 +80,7 @@ void elf_parse(char *file)
   for (i = 0; i < count; ++i)
   {
     if(strcmp(strtable+shdr[i].sh_name,".symtab")==0){
+      printf("%ld\n",shdr[i].sh_size);
       break;
     };
     // printf("%d\n",shdr[i].sh_name);   
@@ -87,7 +88,7 @@ void elf_parse(char *file)
   a = fseek(fp,shdr[i].sh_offset, SEEK_SET);
   Elf64_Sym sym;
   a = fread(&sym,sizeof(Elf64_Sym),1,fp);
-  printf("%d\n",sym.st_shndx);
+  // printf("%d\n",sym);
   return;
 }
 
