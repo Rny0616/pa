@@ -92,7 +92,7 @@ void elf_parse(char *file)
   // printf("%d\n",sym[0]);
   for (int i = 0; i < symcount; i++)
   {
-    printf("%ld\n",sym[i].st_value);
+    printf("%lx\n",sym[i].st_value);
   }
   
   return;
