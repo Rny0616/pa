@@ -98,9 +98,9 @@ void elf_parse(char *file)
     if (shdr->sh_type == SHT_SYMTAB)
     {
       break;
-printf("%d\n",i);
+      printf("%d\n", i);
     }
-    shdr++;
+    shdr+=elf_head.e_shentsize*i;
   }
   return;
 }
