@@ -65,38 +65,40 @@ void elf_parse(char *file)
     printf("Not a ELF file\n");
     exit(0);
   }
-  for (int i = 0; i < EI_NIDENT; i++)
-  {
-    
-  printf("%x",elf_head.e_ident[i]);
-  }
+  
   
   // 解析section 分配内存 section * 数量
-  // Elf64_Shdr *shdr = (Elf64_Shdr *)malloc(sizeof(Elf64_Shdr) * elf_head.e_shnum);
-  // if (NULL == shdr)
+  Elf64_Shdr *shdr = (Elf64_Shdr *)malloc(sizeof(Elf64_Shdr) * elf_head.e_shnum);
+  if (NULL == shdr)
   // {
   //   printf("shdr malloc failed\n");
   //   exit(0);
   // }
 
-  // // 设置fp偏移量 offset，e_shoff含义
-  // a = fseek(fp, elf_head.e_shoff, SEEK_SET); // fseek调整指针的位置，采用参考位置+偏移量
-  // if (0 != a)
+  // 设置fp偏移量 offset，e_shoff含义
+  a = fseek(fp, elf_head.e_shoff, SEEK_SET); // fseek调整指针的位置，采用参考位置+偏移量
+  if (0 != a)
   // {
   //   printf("\nfaile to fseek\n");
   //   exit(0);
   // }
 
-  // // 读取section 到 shdr, 大小为shdr * 数量
-  // a = fread(shdr, sizeof(Elf64_Shdr) * elf_head.e_shnum, 1, fp);
-  // if (0 == a)
+  // 读取section 到 shdr, 大小为shdr * 数量
+  a = fread(shdr, sizeof(Elf64_Shdr) * elf_head.e_shnum, 1, fp);
+  if (0 == a)
   // {
   //   printf("\nfail to read section\n");
   //   exit(0);
   // }
+  printf("%x\n",elf_head.e_shstrndx);
+  // 重置指针位置到文件流开头
+  rewind(fp);
 
-  // // 重置指针位置到文件流开头
-  // rewind(fp);
+  for (int i = 0; i < elf_head.e_shnum; i++)
+  {
+    printf("%x\n",shdr->sh_name);
+  }
+  
 
   // // 将fp指针移到 字符串表偏移位置处
   // fseek(fp, shdr[elf_head.e_shstrndx].sh_offset, SEEK_SET);
