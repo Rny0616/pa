@@ -96,7 +96,7 @@ void elf_parse(char *file)
 
   for (int i = 0; i < elf_head.e_shnum; i++)
   {
-    printf("%x\n",shdr->sh_name);
+    printf("%x\n",shdr->sh_type);
   }
   
 
