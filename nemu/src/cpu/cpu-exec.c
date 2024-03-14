@@ -37,7 +37,7 @@ int ring_buffer_no = 0;
 // ftrace
 #ifdef CONFIG_FTRACE
 
-//解析elf
+// 解析elf
 void elf_parse(char *file)
 {
   FILE *fp;
@@ -72,11 +72,12 @@ void elf_parse(char *file)
   fseek(fp, elf_head.e_shoff, SEEK_SET); // 定位表头偏移
 
   a = fread(shdr, sizeof(Elf64_Shdr), count, fp); // 读出所有表头到shdr
-
+//-----------------------------------read shdr--------------------------------------------------------
   fseek(fp, shdr[elf_head.e_shstrndx].sh_offset, SEEK_SET); // 定位shstrndx实际表的偏移
 
   a = fread(strtable, 1, shdr[elf_head.e_shstrndx].sh_size, fp); // 读出表名的表读到字符?
-  int i =0;
+//-----------------------------------read strable-----------------------------------------------------
+  int i = 0;
   for (i = 0; i < count; ++i)
   {
     if (strcmp(strtable + shdr[i].sh_name, ".symtab") == 0)
@@ -87,14 +88,13 @@ void elf_parse(char *file)
     // printf("%d\n",shdr[i].sh_name);
   }
   int symcount = shdr[i].sh_size / sizeof(Elf64_Sym);
- 
-  a = fseek(fp, shdr[i].sh_offset, SEEK_SET);
- 
-  Elf64_Sym sym[symcount];
- 
-  a = fread(&sym, sizeof(Elf64_Sym), symcount, fp);
- 
 
+  a = fseek(fp, shdr[i].sh_offset, SEEK_SET);
+
+  Elf64_Sym sym[symcount];
+
+  a = fread(&sym, sizeof(Elf64_Sym), symcount, fp);
+//---------------------------------read sym----------------------------------------------
   for (int i = 0; i < symcount; i++)
   {
     if ((sym[i].st_info & 0xf) == STT_FUNC)
@@ -103,10 +103,28 @@ void elf_parse(char *file)
     }
   }
 
+//--------------------------------------------------------------------------------
+int j = 0;
+  for (j = 0; j < count; ++j)
+  {
+    if (strcmp(strtable + shdr[j].sh_name, ".strtab") == 0)
+    {
+      printf("%ld\n", shdr[j].sh_size);
+      break;
+    };
+  }
+
+  a = fseek(fp, shdr[j].sh_offset, SEEK_SET);
+
+  char strtab[1280];
+
+  a = fread(strtab, 1, shdr[j].sh_size, fp);
+  printf("%s\n",strtab);
+//----------------------------------read strtab
+
+
   return;
 }
-
-
 
 #endif
 
