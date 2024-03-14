@@ -88,8 +88,10 @@ void elf_parse(char *file)
     // printf("%d\n",shdr[i].sh_name);
   }
   int symcount = shdr[i].sh_size / sizeof(Elf64_Sym);
+  printf("fp:%ld\n",ftell(fp));
 
   a = fseek(fp, shdr[i].sh_offset, SEEK_SET);
+  printf("fp:%ld\n",ftell(fp));
 
   Elf64_Sym sym[symcount];
 
