@@ -37,6 +37,7 @@ int ring_buffer_no = 0;
 // ftrace
 #ifdef CONFIG_FTRACE
 char strtab[1280];
+Elf64_Sym sym[1280];
 // 解析elf
 void elf_parse(char *file)
 {
