@@ -38,6 +38,7 @@ int ring_buffer_no = 0;
 #ifdef CONFIG_FTRACE
 char strtab[1280];
 Elf64_Sym sym[1280];
+word_t sym_func_index[128];
 // 解析elf
 void elf_parse(char *file)
 {
@@ -130,11 +131,12 @@ void elf_parse(char *file)
   //   printf("%c",strtab[i]);
   // }
   // printf("\n");
-
+  int sfi = 0;
   for (int i = 0; i < symcount; i++)
   {
     if ((sym[i].st_info & 0xf) == STT_FUNC)
     {
+      sym_func_index[sfi++] = sym[i].st_value;
       printf("%lx\t", sym[i].st_value);
       printf("%s\n", strtab + sym[i].st_name);
     }
@@ -208,8 +210,10 @@ static void exec_once(Decode *s, vaddr_t pc)
 #endif
 #ifdef CONFIG_FTRACE
 
+  
   if (s->jar_pc != 0)
   {
+    // sym[]
     printf("%lx---%lx\n", s->n_pc, s->jar_pc);
   }
 
