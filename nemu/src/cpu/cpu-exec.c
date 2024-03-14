@@ -36,7 +36,24 @@ int ring_buffer_no = 0;
 
 // ftrace
 #ifdef CONFIG_FTRACE
+//从字符串头表读出段表索引
+int readtableindex(int count, char *strtable, Elf64_Shdr *shdr,char *tablename)
+{
+  int i = 0;
+  for (i = 0; i < count; ++i)
+  {
+    if (strcmp(strtable + shdr[i].sh_name, tablename) == 0)
+    {
+      break;
+      return i;
+    };
+    return -1;
+  }
+    return -1;
+
 // 解析elf
+}
+//解析elf
 void elf_parse(char *file)
 {
   FILE *fp;
@@ -48,7 +65,6 @@ void elf_parse(char *file)
   }
   // 解析head
   Elf64_Ehdr elf_head;
-
   int a;
   char strtable[1280];
   a = fread(&elf_head, sizeof(Elf64_Ehdr), 1, fp); // fread参数1：读取内容存储地址，参�?2：读取内容大小，参数3：读取次数，参数4：文件读取引�?
@@ -67,41 +83,42 @@ void elf_parse(char *file)
   }
 
   Elf64_Shdr shdr[99];
-  int count = elf_head.e_shnum; // 节头表数�?
-  
-  fseek(fp, elf_head.e_shoff, SEEK_SET);//定位表头偏移
+  int count = elf_head.e_shnum; // 节头表数?
 
-  a =fread(shdr, sizeof(Elf64_Shdr), count, fp);//读出所有表头到shdr
-  
-  fseek(fp, shdr[elf_head.e_shstrndx].sh_offset, SEEK_SET);//定位shstrndx实际表的偏移
- 
-  a = fread(strtable, 1, shdr[elf_head.e_shstrndx].sh_size, fp);//读出表名的表读到字符�?
-  int i = 0;
-  for (i = 0; i < count; ++i)
-  {
-    if(strcmp(strtable+shdr[i].sh_name,".symtab")==0){
-      printf("%ld\n",shdr[i].sh_size);
-      break;
-    };
-    // printf("%d\n",shdr[i].sh_name);   
-  }
-  int symcount = shdr[i].sh_size/sizeof(Elf64_Sym);
-  a = fseek(fp,shdr[i].sh_offset, SEEK_SET);
+  fseek(fp, elf_head.e_shoff, SEEK_SET); // 定位表头偏移
+
+  a = fread(shdr, sizeof(Elf64_Shdr), count, fp); // 读出所有表头到shdr
+
+  fseek(fp, shdr[elf_head.e_shstrndx].sh_offset, SEEK_SET); // 定位shstrndx实际表的偏移
+
+  a = fread(strtable, 1, shdr[elf_head.e_shstrndx].sh_size, fp); // 读出表名的表读到字符?
+  int i =readtableindex(count,strtable,shdr,".symtab");
+  // for (i = 0; i < count; ++i)
+  // {
+  //   if (strcmp(strtable + shdr[i].sh_name, ".symtab") == 0)
+  //   {
+  //     printf("%ld\n", shdr[i].sh_size);
+  //     break;
+  //   };
+  //   // printf("%d\n",shdr[i].sh_name);
+  // }
+  int symcount = shdr[i].sh_size / sizeof(Elf64_Sym);
+  a = fseek(fp, shdr[i].sh_offset, SEEK_SET);
   Elf64_Sym sym[symcount];
-  a = fread(&sym,sizeof(Elf64_Sym),symcount,fp);
+  a = fread(&sym, sizeof(Elf64_Sym), symcount, fp);
   // printf("%d\n",sym[0]);
   for (int i = 0; i < symcount; i++)
   {
-    if ((sym[i].st_info & 0xf )== STT_FUNC)
+    if ((sym[i].st_info & 0xf) == STT_FUNC)
     {
-      
-    printf("%lx\n",sym[i].st_value);
+      printf("%lx\n", sym[i].st_value);
     }
-    
   }
-  
+
   return;
 }
+
+
 
 #endif
 
