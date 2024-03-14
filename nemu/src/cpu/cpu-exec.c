@@ -40,6 +40,7 @@ char strtab[1280];
 Elf64_Sym sym[1280];
 word_t sym_func_value[128];
 word_t sym_func_size[128];
+word_t sym_func_offset[128];
 int sfi = 0;
 
 // 解析elf
@@ -140,6 +141,7 @@ void elf_parse(char *file)
     {
       sym_func_value[sfi] = sym[i].st_value;
       sym_func_size[sfi] = sym[i].st_size;
+      sym_func_offset[sfi] = sym[i].st_name;
       sfi++;
       printf("%lx\t", sym[i].st_value);
       printf("%s\n", strtab + sym[i].st_name);
@@ -149,7 +151,8 @@ void elf_parse(char *file)
 
   return;
 }
-void func_name(word_t addr){
+void func_name(word_t addr)
+{
   TODO();
 }
 #endif
@@ -216,18 +219,17 @@ static void exec_once(Decode *s, vaddr_t pc)
 #endif
 #ifdef CONFIG_FTRACE
 
-  
   if (s->jar_pc != 0)
   {
     for (int i = 0; i < sfi; i++)
     {
-      printf("%lx+%lx\n",sym_func_value[i],sym_func_size[i]);
-      printf("i:%d\n",i);
-    }
+      if ((sym_func_value[i] <= s->n_pc) && (s->n_pc < sym_func_value[i] + sym_func_size[i]))
+      {
+        printf("%lx: %s @%lx\n", s->n_pc, strtab + sym_func_offset[i], s->dnpc);
+      }
 
-    
-    
-    
+      printf("%lx+%lx\n", sym_func_value[i], sym_func_size[i]);
+    }
     printf("%lx---%lx\n", s->n_pc, s->jar_pc);
   }
 
