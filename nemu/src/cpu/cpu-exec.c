@@ -88,10 +88,8 @@ void elf_parse(char *file)
     // printf("%d\n",shdr[i].sh_name);
   }
   int symcount = shdr[i].sh_size / sizeof(Elf64_Sym);
-  printf("fp:%ld\n",ftell(fp));
 
   a = fseek(fp, shdr[i].sh_offset, SEEK_SET);
-  printf("fp:%ld\n",ftell(fp));
 
   Elf64_Sym sym[symcount];
 
@@ -115,21 +113,22 @@ int j = 0;
       break;
     };
   }
-  printf("fp:%ld\n",ftell(fp));
   a = fseek(fp, shdr[j].sh_offset, SEEK_SET);
-  printf("fp:%ld\n",ftell(fp));
 
-  char strtab[1280];
+  char strtab[shdr[j].sh_size];
 
   a = fread(strtab, 1, shdr[j].sh_size, fp);
   if (!a)
   {
     printf("1\n");
   }
-  
-  printf("%s\n",strtab);
 //----------------------------------read strtab
-
+  for (int i = 0; i < shdr[j].sh_size; i++)
+  {
+    printf("%c",strtab[i]);
+  }
+  printf("\n");
+  
 
   return;
 }
