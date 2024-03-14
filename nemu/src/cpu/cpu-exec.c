@@ -113,7 +113,9 @@ int j = 0;
       break;
     };
   }
+  printf("fp:%ld\n",ftell(fp));
   a = fseek(fp, shdr[j].sh_offset, SEEK_SET);
+  printf("fp:%ld\n",ftell(fp));
 
   char strtab[1280];
 
