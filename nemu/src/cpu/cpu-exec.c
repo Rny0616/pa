@@ -122,13 +122,23 @@ int j = 0;
   {
     printf("1\n");
   }
-//----------------------------------read strtab
+//----------------------------------read strtab--------------------
+  
   for (int i = 0; i < shdr[j].sh_size; i++)
   {
     printf("%c",strtab[i]);
   }
   printf("\n");
-  
+
+  for (int i = 0; i < symcount; i++)
+  {
+    if ((sym[i].st_info & 0xf) == STT_FUNC)
+    {
+      printf("%lx\n", sym[i].st_value);
+      printf("%s\n",strtab+sym[i].st_name);
+    }
+  }
+//-----------------------parse .sym and .str--------------------------------
 
   return;
 }
