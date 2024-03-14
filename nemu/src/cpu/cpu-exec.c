@@ -39,6 +39,8 @@ int ring_buffer_no = 0;
 char strtab[1280];
 Elf64_Sym sym[1280];
 word_t sym_func_index[128];
+int sfi = 0;
+
 // 解析elf
 void elf_parse(char *file)
 {
@@ -131,7 +133,6 @@ void elf_parse(char *file)
   //   printf("%c",strtab[i]);
   // }
   // printf("\n");
-  int sfi = 0;
   for (int i = 0; i < symcount; i++)
   {
     if ((sym[i].st_info & 0xf) == STT_FUNC)
@@ -213,7 +214,14 @@ static void exec_once(Decode *s, vaddr_t pc)
   
   if (s->jar_pc != 0)
   {
-    // sym[]
+    for (int i = 0; i < sfi; i++)
+    {
+      printf("%lx\n",sym_func_index[i]);
+    }
+
+    
+    
+    
     printf("%lx---%lx\n", s->n_pc, s->jar_pc);
   }
 
