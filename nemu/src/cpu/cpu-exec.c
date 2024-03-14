@@ -134,7 +134,7 @@ int j = 0;
   {
     if ((sym[i].st_info & 0xf) == STT_FUNC)
     {
-      printf("%lx\n", sym[i].st_value);
+      printf("%lx\t", sym[i].st_value);
       printf("%s\n",strtab+sym[i].st_name);
     }
   }
