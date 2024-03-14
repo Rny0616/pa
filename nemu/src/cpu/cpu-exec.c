@@ -113,13 +113,17 @@ int j = 0;
       break;
     };
   }
-  // printf("%ld\n",shdr[j].sh_size);
   a = fseek(fp, shdr[j].sh_offset, SEEK_SET);
 
   char strtab[1280];
 
   a = fread(strtab, 1, shdr[j].sh_size, fp);
-  // printf("%s\n",strtab);
+  if (!a)
+  {
+    printf("1\n");
+  }
+  
+  printf("%s\n",strtab);
 //----------------------------------read strtab
 
 
