@@ -113,7 +113,7 @@ int j = 0;
       break;
     };
   }
-
+  printf("%d\n",j);
   a = fseek(fp, shdr[j].sh_offset, SEEK_SET);
 
   char strtab[1280];
