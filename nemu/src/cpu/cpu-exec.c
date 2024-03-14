@@ -263,7 +263,7 @@ extern char elf[128];
 void cpu_exec(uint64_t n)
 {
 #ifdef CONFIG_FTRACE
-if (elf!=NULL)
+if (elf[0]!='\0')
 {
   printf("asd\n");
   elf_parse(elf);
