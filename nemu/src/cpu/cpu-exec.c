@@ -45,7 +45,7 @@ void elf_parse(char *file)
   fp = fopen(file, "r");
   if (NULL == fp)
   {
-    printf("fail to open the file");
+    printf("fail to open the file\n");
     exit(0);
   }
   // 解析head
@@ -263,7 +263,11 @@ extern char elf[128];
 void cpu_exec(uint64_t n)
 {
 #ifdef CONFIG_FTRACE
+if (elf!=NULL)
+{
   elf_parse(elf);
+}
+
 #endif
   g_print_step = (n < MAX_INST_TO_PRINT);
   switch (nemu_state.state)
