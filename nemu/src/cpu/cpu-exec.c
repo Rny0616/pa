@@ -265,7 +265,8 @@ void cpu_exec(uint64_t n)
 #ifdef CONFIG_FTRACE
 if (elf!=NULL)
 {
-elf_parse(elf);
+  printf("asd\n");
+  elf_parse(elf);
 }
 
 #endif
