@@ -38,7 +38,8 @@ int ring_buffer_no = 0;
 #ifdef CONFIG_FTRACE
 char strtab[1280];
 Elf64_Sym sym[1280];
-word_t sym_func_index[128];
+word_t sym_func_value[128];
+word_t sym_func_size[128];
 int sfi = 0;
 
 // 解析elf
@@ -137,7 +138,8 @@ void elf_parse(char *file)
   {
     if ((sym[i].st_info & 0xf) == STT_FUNC)
     {
-      sym_func_index[sfi++] = sym[i].st_value;
+      sym_func_value[sfi++] = sym[i].st_value;
+      sym_func_size[sfi++] = sym[i].st_size;
       printf("%lx\t", sym[i].st_value);
       printf("%s\n", strtab + sym[i].st_name);
     }
@@ -146,7 +148,9 @@ void elf_parse(char *file)
 
   return;
 }
-
+void func_name(word_t addr){
+  TODO();
+}
 #endif
 
 void device_update();
@@ -216,7 +220,7 @@ static void exec_once(Decode *s, vaddr_t pc)
   {
     for (int i = 0; i < sfi; i++)
     {
-      printf("%lx\n",sym_func_index[i]);
+      printf("%lx+%lx",sym_func_value[i],sym_func_value[i]);
     }
 
     
