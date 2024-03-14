@@ -72,12 +72,12 @@ void elf_parse(char *file)
 
   fseek(fp, elf_head.e_shoff, SEEK_SET); // 定位表头偏移
 
-  a = fread(shdr, sizeof(Elf64_Shdr), count, fp); // 读出所有表头到shdr
-//-----------------------------------read shdr--------------------------------------------------------
+  a = fread(shdr, sizeof(Elf64_Shdr), count, fp);           // 读出所有表头到shdr
+                                                            //-----------------------------------read shdr--------------------------------------------------------
   fseek(fp, shdr[elf_head.e_shstrndx].sh_offset, SEEK_SET); // 定位shstrndx实际表的偏移
 
   a = fread(strtable, 1, shdr[elf_head.e_shstrndx].sh_size, fp); // 读出表名的表读到字符?
-//-----------------------------------read strable-----------------------------------------------------
+                                                                 //-----------------------------------read strable-----------------------------------------------------
   int i = 0;
   for (i = 0; i < count; ++i)
   {
@@ -95,7 +95,7 @@ void elf_parse(char *file)
   // Elf64_Sym sym[symcount];
 
   a = fread(&sym, sizeof(Elf64_Sym), symcount, fp);
-//---------------------------------read sym----------------------------------------------
+  //---------------------------------read sym----------------------------------------------
   for (int i = 0; i < symcount; i++)
   {
     if ((sym[i].st_info & 0xf) == STT_FUNC)
@@ -104,8 +104,8 @@ void elf_parse(char *file)
     }
   }
 
-//--------------------------------------------------------------------------------
-int j = 0;
+  //--------------------------------------------------------------------------------
+  int j = 0;
   for (j = 0; j < count; ++j)
   {
     if (strcmp(strtable + shdr[j].sh_name, ".strtab") == 0)
@@ -123,8 +123,8 @@ int j = 0;
   {
     printf("1\n");
   }
-//----------------------------------read strtab--------------------
-  
+  //----------------------------------read strtab--------------------
+
   // for (int i = 0; i < shdr[j].sh_size; i++)
   // {
   //   printf("%c",strtab[i]);
@@ -136,10 +136,10 @@ int j = 0;
     if ((sym[i].st_info & 0xf) == STT_FUNC)
     {
       printf("%lx\t", sym[i].st_value);
-      printf("%s\n",strtab+sym[i].st_name);
+      printf("%s\n", strtab + sym[i].st_name);
     }
   }
-//-----------------------parse .sym and .str--------------------------------
+  //-----------------------parse .sym and .str--------------------------------
 
   return;
 }
@@ -263,11 +263,10 @@ extern char elf[128];
 void cpu_exec(uint64_t n)
 {
 #ifdef CONFIG_FTRACE
-if (elf[0]!='\0')
-{
-  printf("asd\n");
-  elf_parse(elf);
-}
+  if (elf[0] != '\0')
+  {
+    elf_parse(elf);
+  }
 
 #endif
   g_print_step = (n < MAX_INST_TO_PRINT);
