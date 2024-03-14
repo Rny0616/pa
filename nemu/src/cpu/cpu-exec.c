@@ -36,7 +36,7 @@ int ring_buffer_no = 0;
 
 // ftrace
 #ifdef CONFIG_FTRACE
-
+char *strtab;
 // 解析elf
 void elf_parse(char *file)
 {
@@ -115,7 +115,7 @@ int j = 0;
   }
   a = fseek(fp, shdr[j].sh_offset, SEEK_SET);
 
-  char strtab[shdr[j].sh_size];
+  // char strtab[shdr[j].sh_size];
 
   a = fread(strtab, 1, shdr[j].sh_size, fp);
   if (!a)
@@ -124,11 +124,11 @@ int j = 0;
   }
 //----------------------------------read strtab--------------------
   
-  for (int i = 0; i < shdr[j].sh_size; i++)
-  {
-    printf("%c",strtab[i]);
-  }
-  printf("\n");
+  // for (int i = 0; i < shdr[j].sh_size; i++)
+  // {
+  //   printf("%c",strtab[i]);
+  // }
+  // printf("\n");
 
   for (int i = 0; i < symcount; i++)
   {
