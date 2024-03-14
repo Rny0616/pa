@@ -138,8 +138,9 @@ void elf_parse(char *file)
   {
     if ((sym[i].st_info & 0xf) == STT_FUNC)
     {
-      sym_func_value[sfi++] = sym[i].st_value;
-      sym_func_size[sfi++] = sym[i].st_size;
+      sym_func_value[sfi] = sym[i].st_value;
+      sym_func_size[sfi] = sym[i].st_size;
+      sfi++;
       printf("%lx\t", sym[i].st_value);
       printf("%s\n", strtab + sym[i].st_name);
     }
