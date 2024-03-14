@@ -92,7 +92,12 @@ void elf_parse(char *file)
   // printf("%d\n",sym[0]);
   for (int i = 0; i < symcount; i++)
   {
+    if ((sym[i].st_info & 0xf )== STT_FUNC)
+    {
+      
     printf("%lx\n",sym[i].st_value);
+    }
+    
   }
   
   return;
