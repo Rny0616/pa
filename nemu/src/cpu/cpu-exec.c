@@ -92,7 +92,7 @@ void elf_parse(char *file)
 
   a = fseek(fp, shdr[i].sh_offset, SEEK_SET);
 
-  Elf64_Sym sym[symcount];
+  // Elf64_Sym sym[symcount];
 
   a = fread(&sym, sizeof(Elf64_Sym), symcount, fp);
 //---------------------------------read sym----------------------------------------------
