@@ -220,7 +220,7 @@ static void exec_once(Decode *s, vaddr_t pc)
   {
     for (int i = 0; i < sfi; i++)
     {
-      printf("%lx+%lx\n",sym_func_value[i],sym_func_value[i]);
+      printf("%lx+%lx\n",sym_func_value[i],sym_func_size[i]);
     }
 
     
